@@ -8,6 +8,8 @@ http://github.com/technicat/LearnUnity
 public var showOnTop:boolean = true; // banner on top or bottom of screen
 public var dontDestroy:boolean = false; // keep this GameObject around for next scene
 
+#if UNITY_IPHONE
+
 // don't make this a local variable, or else it'll get garbage collected
 private var banner:ADBannerView;
 
@@ -30,4 +32,4 @@ function Start () {
 		banner = null;
 	}
 }
-
+#endif

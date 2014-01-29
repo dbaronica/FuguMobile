@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 
 namespace Fugu {
-	
+
+#if UNITY_IPHONE
 	sealed public class GameCenter : MonoBehaviour {
 
 		public bool showAchievementBanners = true;
 		// Use this for initialization
 		void Start () {
-#if UNITY_IPHONE && !P31_GC
+#if !P31_GC
 		Social.localUser.Authenticate ( success => {
       	  if (success && showAchievementBanners) {
 				GameCenterPlatform.ShowDefaultAchievementCompletionBanner(showAchievementBanners);
@@ -21,7 +22,7 @@ namespace Fugu {
 		}
     	);
 #endif
-#if UNITY_IPHONE && P31_GC
+#if P31_GC
 			GameCenterBinding.authenticateLocalPlayer();
 			if (showAchievementBanners) {
 				GameCenterBinding.showCompletionBannerForAchievements();
@@ -100,7 +101,7 @@ namespace Fugu {
 #if UNITY_IPHONE && !P31_GC
 			Social.ShowLeaderboardUI ();
 #endif
-#if UNITY_IPHONE && P31_GC
+#if P31_GC
 			GameCenterBinding.showLeaderboardWithTimeScope (GameCenterLeaderboardTimeScope.AllTime);
 #endif
 		}
@@ -115,4 +116,5 @@ namespace Fugu {
 		}
 	
 }
+#endif
 }
